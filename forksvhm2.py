@@ -46,7 +46,7 @@ y = np.load("nummertrain.npy").astype(int)
 
 y = hot(y)
 x_train, x_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42)
+    X, y, test_size=0.2)
 
 
 # In[40]:
@@ -97,12 +97,17 @@ x3 = keras.layers.concatenate([conv_out, num])
 x4 = keras.layers.concatenate([conv_out, num])
 x5 = keras.layers.concatenate([conv_out, num])
 
-x1 = Dense(128, activation='relu')(x1)
-x2 = Dense(128, activation='relu')(x2)
-x3 = Dense(128, activation='relu')(x3)
-x4 = Dense(128, activation='relu')(x4)
-x5 = Dense(128, activation='relu')(x5)
+x1 = Dense(256, activation='relu')(x1)
+x2 = Dense(256, activation='relu')(x2)
+x3 = Dense(256, activation='relu')(x3)
+x4 = Dense(256, activation='relu')(x4)
+x5 = Dense(256, activation='relu')(x5)
 
+x1 = Dense(1024, activation='relu')(x1)
+x2 = Dense(1024, activation='relu')(x2)
+x3 = Dense(1024, activation='relu')(x3)
+x4 = Dense(1024, activation='relu')(x4)
+x5 = Dense(1024, activation='relu')(x5)
 
 x1 = Dropout(0.5)(x1)
 x2 = Dropout(0.5)(x2)
@@ -122,7 +127,7 @@ model = Model(inputs=a, outputs=[x1, x2, x3, x4, x5, numout])
 
 display(SVG(model_to_dot(model).create(prog='dot', format='svg')))
 # load weights
-#model.load_weights("weights.forksvhmbest.hdf5")
+# model.load_weights("weights.forksvhmbest.hdf5")
 
 model.compile(loss=keras.losses.categorical_crossentropy,
               optimizer=keras.optimizers.Adadelta(),
@@ -153,7 +158,7 @@ model.fit(x_train, [y1,y2,y3,y4,y5,ynum],
 score = model.evaluate(x_test, [y1_t,y2_t,y3_t,y4_t,y5_t,ynum_t], verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
-model.save('forksvhm.h5')
+model.save('test.h5')
 
 
 # In[39]:
