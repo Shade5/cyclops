@@ -593,6 +593,14 @@ model.compile(loss=keras.losses.categorical_crossentropy,
 
 # In[ ]:
 
+
+A = np.array(model.predict(x_test))
+c=0
+for i in range(A.shape[1]):
+    c+=np.array_equal(np.argmax(np.array(A[:,i,:]).reshape((5,11)),axis=1),Y[i,0:5])
+print("Accuracy:",100*c/A.shape[1])
+
+
 model.fit(x_train,[y1,y2,y3,y4,y5],
         batch_size=batch_size,
         epochs=epochs,
