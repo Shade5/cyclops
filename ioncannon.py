@@ -106,7 +106,8 @@ numtower.compile(loss=keras.losses.categorical_crossentropy,
 numtower.fit(x_train, ynum,
         batch_size=batch_size,
         epochs=epochs,
-        validation_split=0.2,
+        #validation_split=0.2,
+        validation_data=(x_test,ynum_t),
         shuffle=True,
         verbose=2,
         callbacks=callbacks)
@@ -179,7 +180,8 @@ d1.compile(loss=keras.losses.categorical_crossentropy,
 d1.fit(x_train,y1,
         batch_size=batch_size,
         epochs=epochs,
-        validation_split=0.2,
+        #validation_split=0.2,
+        validation_data=(x_test,y1_t),
         shuffle=True,
         verbose=2,
         callbacks=callbacks)
@@ -251,7 +253,8 @@ d2.compile(loss=keras.losses.categorical_crossentropy,
 d2.fit(x_train,y2,
         batch_size=batch_size,
         epochs=epochs,
-        validation_split=0.2,
+        #validation_split=0.2,
+        validation_data=(x_test,y2_t),
         shuffle=True,
         verbose=2,
         callbacks=callbacks)
@@ -326,7 +329,8 @@ d3.compile(loss=keras.losses.categorical_crossentropy,
 d3.fit(x_train,y3,
         batch_size=batch_size,
         epochs=epochs,
-        validation_split=0.2,
+        #validation_split=0.2,
+        validation_data=(x_test,y3_t),
         shuffle=True,
         verbose=2,
         callbacks=callbacks)
@@ -398,7 +402,8 @@ d4.compile(loss=keras.losses.categorical_crossentropy,
 d4.fit(x_train,y4,
         batch_size=batch_size,
         epochs=epochs,
-        validation_split=0.2,
+        #validation_split=0.2,
+        validation_data=(x_test,y4_t),
         shuffle=True,
         verbose=2,
         callbacks=callbacks)
@@ -421,12 +426,13 @@ x_train444, x_test444, y_train444, y_test444 = train_test_split(
 y444 = y_train444[:,33:44]
 y444_t= y_test444[:,33:44]
 
-callbacks = [EarlyStopping(monitor='val_loss', patience=10, verbose=0)]
+callbacks = [EarlyStopping(monitor='val_loss', patience=20, verbose=0)]
 
 d4.fit(x_train444,y444,
         batch_size=batch_size,
         epochs=50,
-        validation_split=0.2,
+        #validation_split=0.2,
+        validation_data=(x_test444,y444_t),
         shuffle=True,
         verbose=2,
         callbacks=callbacks)
@@ -498,7 +504,8 @@ d5.compile(loss=keras.losses.categorical_crossentropy,
 d5.fit(x_train,y5,
         batch_size=batch_size,
         epochs=epochs,
-        validation_split=0.2,
+        #validation_split=0.2,
+        validation_data=(x_test,y5_t),
         shuffle=True,
         verbose=2,
         callbacks=callbacks)
@@ -511,7 +518,7 @@ print('Test accuracy:', score[1])
 # In[ ]:
 print()
 print("part2")
-callbacks = [EarlyStopping(monitor='val_loss', patience=10, verbose=0)]
+callbacks = [EarlyStopping(monitor='val_loss', patience=20, verbose=0)]
 X555 = np.load("Xcropresize5.npy")
 y555 = np.load("Ycropresize5.npy").astype(int)
 
@@ -524,7 +531,8 @@ y555_t= y_test555[:,44:55]
 d5.fit(x_train555,y555,
         batch_size=batch_size,
         epochs=50,
-        validation_split=0.2,
+        #validation_split=0.2,
+        validation_data=(x_test555,y555_t),
         shuffle=True,
         verbose=2,
         callbacks=callbacks)
@@ -588,7 +596,8 @@ model.compile(loss=keras.losses.categorical_crossentropy,
 model.fit(x_train,[y1,y2,y3,y4,y5],
         batch_size=batch_size,
         epochs=epochs,
-        validation_split=0.2,
+        #validation_split=0.2,
+        validation_data=(x_test,[y1_t,y2_t,y3_t,y4_t,y5_t]),
         shuffle=True,
         verbose=2)
 
